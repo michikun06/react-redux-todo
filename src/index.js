@@ -1,17 +1,24 @@
+// 必要なものをimportする
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+// import './index.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+// import serviceWorker from "./serviceWorker";
 
+import { Provider } from "react-redux";
+import createStore from "./createStore";
+
+
+// createStore.jsで作ったcreateStoreをstoreに代入し、Reactに組み込む。
+const store = createStore();
+
+
+// 作成したstoreをProviderに渡し、Appをラップする。これで全component内でstateを使用できる。
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// serviceWorker();
